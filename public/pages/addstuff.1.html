@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8" />
+	<title>Tnet Dashboard</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="http://fonts.googleapis.com/css?family=Nunito:400,300,700" rel="stylesheet" id="fontFamilySrc" />
+	<link href="../assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+	<link href="../assets/plugins/bootstrap/bootstrap-4.1.1/css/bootstrap.min.css" rel="stylesheet" />
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+	<link href="../assets/plugins/font-awesome/5.1/css/all.css" rel="stylesheet" />
+	<link href="../assets/css/animate.min.css" rel="stylesheet" />
+	<link href="../assets/css/style.css" rel="stylesheet" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+
+	<!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
+	<link href="../assets/plugins/bootstrap-calendar/css/bootstrap_calendar.css" rel="stylesheet" />
+	<link href="../assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+	<link href="../assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" />	
+	<link href="../assets/plugins/morris/morris.css" rel="stylesheet" />
+	<!-- ================== END PAGE LEVEL CSS STYLE ================== -->
+
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="../assets/plugins/pace/pace.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<!-- ================== END BASE JS ================== -->
+
+	<!--[if lt IE 9]>
+	    <script src="../assets/crossbrowserjs/excanvas.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<!-- begin #page-loader -->
+	<div id="page-loader" class="page-loader fade in"><span class="spinner">Loading...</span></div>
+	<!-- end #page-loader -->
+
+	<!-- begin #page-container -->
+	<div id="page-container"
+		class="fade page-container page-header-fixed page-sidebar-fixed page-with-two-sidebar page-with-footer">
+		<!-- begin #header -->
+		<div id="app1"   ng-app="dashboardApp" ng-controller="userdetails">
+			<div id="header" class="header navbar navbar-default navbar-fixed-top">
+				<!-- begin container-fluid -->
+				<div class="container-fluid">
+					<!-- begin mobile sidebar expand / collapse button -->
+					<div class="navbar-header">
+						<a href="/dashboard" class="navbar-brand"><img src="../assets/img/logo.png" class="logo"
+								alt="" />Tnet Analytics</a>
+						<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<!-- end mobile sidebar expand / collapse button -->
+
+					<!-- begin navbar-right -->
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown navbar-user">
+							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+								<span class="hidden-xs">{{userdetails.Name}}</span> <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu pull-right">
+								<li><a href="/user/edituserdetails">Edit Profile</a></li>
+								<li class="divider"></li>
+								<li><a href="/logout">Log Out</a></li>
+							</ul>
+						</li>
+					</ul>
+					<!-- end navbar-right -->
+				</div>
+				<!-- end container-fluid -->
+			</div>
+			<!-- end #header -->
+
+			<!-- begin #sidebar -->
+			<div id="sidebar" class="sidebar">
+				<!-- begin sidebar scrollbar -->
+				<div data-scrollbar="true" data-height="100%">
+					<!-- begin sidebar nav -->
+					<ul class="nav">
+						<li class="nav-user">
+							<div class="info">
+								<div class="name dropdown">
+									<a href="javascript:;" data-toggle="dropdown">{{userdetails.Name}}<b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li><a href="/user/edituserdetails">Edit Profile</a></li>
+										<li class="divider"></li>
+										<li><a href="/logout">Log Out</a></li>
+									</ul>
+								</div>
+								<div class="position">{{userdetails.Designation}}</div>
+							</div>
+						</li>
+						<li class="nav-header">Navigation</li>
+						<li>
+							<a href="/dashboard">
+								<i class="fa fa-home"></i>
+								<span>Dashboard</span>
+							</a>
+						</li>
+						<li>
+							<a href="/selectmachine">
+								<i class="fa fa-industry"></i>
+								<span>Machines</span>
+							</a>
+						</li>
+						<li class="divider has-minify-btn"></li>
+						<li class="has-sub">
+							<a href="javascript:;">
+								<b class="caret pull-right"></b>
+								<i class="fa fa-chart-area"></i>
+								<span>Analytics</span>
+							</a>
+							<ul class="sub-menu">
+								<li><a href="histdata.html">Historical Data<i class="fa fa-th text-theme m-l-3"></i></a>
+								</li>
+								<li><a href="trendhistdata.html">Trend/Histogram<i
+											class="fa fa-chart-bar text-theme m-l-3"></i></a></li>
+								<li><a href="corrdata.html">Correlation<i class="fa fa-table  text-theme m-l-3"></i></a>
+								</li>
+								<li><a href="alarmdata.html">Alarm<i
+											class="fa fa-exclamation-triangle text-theme m-l-3"></i></a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#modal-dialog" data-toggle="modal">
+								<i class="fa fa-question-circle"></i>
+								<span>About</span>
+							</a>
+						</li>
+						<li class="divider has-minify-btn">
+							<!-- begin sidebar minify button -->
+							<a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i
+									class="fa fa-angle-left"></i></a>
+							<!-- end sidebar minify button -->
+						</li>
+						<div ng-show="adminVar">
+							<ul class="nav">
+								<br>
+								<li class="nav-header">User Management</li>
+								<li>
+									<a href="/user/adduser">
+										<i class="fas fa-plus"></i>
+										<span>Add/Remove Users</span>
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li class="nav-header">Location Management</li>
+								<li class="active">
+									<a href="/addstuff">
+										<i class="fas fa-plus"></i>
+										<span>Add/Remove Things</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</ul>
+					<!-- end sidebar nav -->
+				</div>
+				<!-- end sidebar scrollbar -->
+			</div>
+			<div class="sidebar-bg"></div>
+			<!-- end #sidebar -->
+		</div>
+		<div class="modal fade" id="modal-dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title">About Tnet</h4>
+					</div>
+					<div class="modal-body">
+						<h4>Tnet Analytics</h4>
+						<img src="../assets/img/logosmall.png" class="logo" alt="" />
+						<h3></h3>
+						<p> Version 01.00.00 </p>
+						<h3></h3>
+						&copy;<b>TOSHIBA MACHINE (CHENNAI) PVT. LTD.</b>
+						<p>All Rights Reserved</p>
+					</div>
+					<div class="modal-footer">
+						<a href="javascript:;" class="btn width-100 btn-default" data-dismiss="modal">Close</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- begin #content -->
+		<div id="content" class="content">
+
+		<!-- begin page-header -->
+		<h1 class="page-header">Add Things <small>(Factory/Shopfloor/Machine)</small></h1>
+		<!-- end page-header -->
+		<div class="row">
+				<!-- begin col-3 -->
+				<div class="col-sm-6 col-lg-3">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Factory</h5>
+							<p class="card-text">Add Factories to view Shopfloors.</p>
+							<a href="#modal-addFactory" class="btn btn-primary" data-toggle="modal">Add Factory</a>
+						</div>
+					</div>
+					<div class="modal" id="modal-addFactory">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									<h4 class="modal-title">Register a Factory</h4>
+								</div>
+								<div class="modal-body">
+									<form method="POST" id="registerfac" class="form-input-flat">
+										<div class="form-group">
+											<label for="factoryname">Factory Name</label>
+											<input type="text" class="form-control" name="factoryname" placeholder="Factory Name" required>
+										</div>
+										<div class="form-group">
+											<label for="factorylocation">Factory Location</label>
+											<input type="text" class="form-control" name="factorylocation" placeholder="Factory Location" required>
+										</div>
+										<button onclick="submitfactory()" class="btn btn-lime btn-lg btn-block">Register!</button>
+									</form>	
+								</div>
+								<div class="modal-footer">
+									<a href="javascript:;" class="btn width-100 btn-default" data-dismiss="modal">Close</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+				<!-- begin col-3 -->
+				<div id="shopfloor" class="col-sm-6 col-lg-3"  ng-app="shopfloorapp" ng-controller="getfactories">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Shopfloor</h5>
+							<p class="card-text">Add Shopfloors to view Machines.</p>
+							<a href="#modal-addShopfloor" ng-click="getfac()" class="btn btn-primary" data-toggle="modal">Add Shopfloor</a>
+						</div>
+					</div>
+					<div class="modal" id="modal-addShopfloor">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									<h4 class="modal-title">Register a Shopfloor</h4>
+								</div>
+								<div class="modal-body">
+									<form method="POST" id="registershop" class="form-input-flat">
+										<div class="form-group">
+												<label for="shopfloor">Shopfloor Name</label>
+												<input type="text" class="form-control" name="shopfloorname" placeholder="Shopfloor Name" required>
+										</div>
+										<div class="form-group">
+											<label for="Shopfloor">Select Factory</label>
+											<select name="factoryname">
+												<option ng-repeat="x in factories" value="{{x.facname}}">{{x.facname}}</option>
+											</select>
+										</div>
+										<button onclick="submitshopfloor()" class="btn btn-lime btn-lg btn-block">Register!</button>
+									</form>	
+								</div>
+								<div class="modal-footer">
+									<a href="javascript:;" class="btn width-100 btn-default" data-dismiss="modal">Close</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+				<!-- begin col-3 -->
+				<div class="col-sm-6 col-lg-3">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Machine</h5>
+							<p class="card-text">Add Machines to view details.</p>
+							<a href="#modal-addMachine" class="btn btn-primary" data-toggle="modal">Add Machine</a>
+						</div>
+					</div>
+					<div class="modal" id="modal-addMachine">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									<h4 class="modal-title">Register a Machine</h4>
+								</div>
+								<div class="modal-body">
+									<form action="registermachine" method="POST" name="registermac" class="form-input-flat">
+										<div class="form-group">
+												<label for="machinename">Factory Name</label>
+												<input type="text" class="form-control" name="machinename" placeholder="Machine Name" required>
+										</div>
+										<div class="form-group">
+												<label for="machineid">Factory ID</label>
+												<input type="text" class="form-control" name="machineid" placeholder="Machine ID" required>
+										</div>
+										<button type="submit" class="btn btn-lime btn-lg btn-block">Register!</button>
+									</form>	
+								</div>
+								<div class="modal-footer">
+									<a href="javascript:;" class="btn width-100 btn-default" data-dismiss="modal">Close</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+				<!-- begin col-3 -->
+				<!-- <div class="col-sm-6 col-lg-3">
+
+				</div> -->
+				<!-- end col-3 -->
+			</div>
+			<!-- end row -->
+		</div>
+		<!-- end #content -->
+	</div>
+	<!-- end page container -->
+
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="../assets/plugins/jquery/jquery-3.3.1.min.js"></script>
+	<script src="../assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+	<script src="../assets/plugins/bootstrap/bootstrap-4.1.1/js/bootstrap.bundle.min.js"></script>
+	<!--[if lt IE 9]>
+		<script src="../assets/crossbrowserjs/html5shiv.js"></script>
+		<script src="../assets/crossbrowserjs/respond.min.js"></script>
+	<![endif]-->
+	<script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+	<script src="../assets/plugins/js/tpage-globals.js"></script>
+	<!-- ================== END BASE JS ================== -->
+
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="../assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>
+	<script src="../assets/plugins/chart-js/Chart.js"></script>
+	<script src="../assets/plugins/chart-js/chartjs-plugin-zoom.js"></script>
+	<script src="../assets/plugins/gritter/js/jquery.gritter.js"></script>
+	<script src="../assets/plugins/morris/raphael.min.js"></script>
+	<script src="../assets/plugins/morris/morris.js"></script>
+	<script src="../assets/plugins/canvasjs/canvasjs.min.js"></script>
+	<script src="../assets/plugins/canvasjs/canvasjs.react.js"></script>
+	<script src="../assets/plugins/flot/jquery.flot.min.js"></script>
+	<script src="../assets/plugins/flot/jquery.flot.time.min.js"></script>
+	<script src="../assets/plugins/flot/jquery.flot.resize.min.js"></script>
+	<script src="../assets/plugins/flot/jquery.flot.pie.min.js"></script>
+	<script src="../assets/plugins/flot/jquery.flot.stack.min.js"></script>
+	<script src="../assets/plugins/flot/jquery.flot.crosshair.min.js"></script>
+	<script src="../assets/plugins/flot/jquery.flot.categories.js"></script>
+	<script src="../assets/plugins/flot/jquery.flot.navigate.js"></script>
+	<script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+	<script src="../assets/plugins/flot/CurvedLines/curvedLines.js"></script>
+	<script src="../assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+	<script src="../assets/plugins/jquery-jvectormap/jquery-jvectormap-world-merc-en.js"></script>
+	<script src="../assets/js/tpage-dashboard.js"></script>
+	<script src="../assets/js/demo.js"></script>
+	<script src="../assets/js/apps.min.js"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+
+
+
+	<script>
+		function submitfactory(){
+			var form = $('#registerfac');
+			var formData = $(form).serialize();
+			event.preventDefault();
+			$.ajax({
+				type: 'POST',
+				url: "/factories/registerfactory",
+				data: formData
+			}).done(function(response) {
+				console.log(response);
+				alert(response);
+				form[0].reset();
+				// // Clear the form.
+				// $('#registerfac.factoryname').val('');
+				// $('#registerfac.factoryid').val('');
+			})
+		}
+		function submitshopfloor(){
+			var form = $('#registershop');
+			var formData = $(form).serialize();
+			event.preventDefault();
+			$.ajax({
+				type: 'POST',
+				url: "/shopfloors/registershopfloor",
+				data: formData
+			}).done(function(response) {
+				console.log(response);
+				alert(response);
+				form[0].reset();
+				// // Clear the form.
+				// $('#registerfac.factoryname').val('');
+				// $('#registerfac.factoryid').val('');
+			})
+		}
+		$(document).ready(function () {
+			App.init();
+			// Demo.init();
+			// PageDemo.init();
+		});
+		var app = angular.module('dashboardApp', []);
+		app.controller('userdetails', function ($scope, $http) {
+			$http.get("/user/userdetails").then(function (response) {
+				console.log("Fetching user details");
+				$scope.userdetails = response.data;
+				console.log($scope.userdetails);
+				if(response.data.admin==1){
+					$scope.adminVar = true;
+				}else{
+					$scope.adminVar = false;
+				}
+			});
+		});
+
+		var facapp = angular.module('shopfloorapp', []);
+		facapp.controller('getfactories', function($scope, $http) {
+			$scope.getfac = function() {
+				$http.get("/factories/listfactories").then(function(response) {
+				console.log(response.data);
+				$scope.factories = response.data;
+			});
+			};
+		});
+
+		var fac = document.getElementById('shopfloor');
+		angular.element(document).ready(function() {
+			angular.bootstrap(fac, ['shopfloorapp']);
+		});
+	</script>
+</body>
+
+</html>

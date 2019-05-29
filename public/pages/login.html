@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title>Source Admin | Login Page</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta content="Portal to view device details" name="description" />
+	<meta content="Vinay Lanka" name="author" />
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="http://fonts.googleapis.com/css?family=Nunito:400,300,700" rel="stylesheet" id="fontFamilySrc" />
+	<link href="../assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+	<!-- <link href="../assets/plugins/bootstrap/bootstrap-4.1.1/css/bootstrap.min.css" rel="stylesheet" /> -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="../assets/plugins/font-awesome/5.1/css/all.css" rel="stylesheet" />
+	<link href="../assets/css/animate.min.css" rel="stylesheet" />
+	<link href="../assets/css/style.css" rel="stylesheet" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+    
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="../assets/plugins/pace/pace.min.js"></script>
+	<!-- ================== END BASE JS ================== -->
+	
+	<!--[if lt IE 9]>
+	    <script src="../assets/crossbrowserjs/excanvas.min.js"></script>
+	<![endif]-->
+</head>
+<body class="pace-top">
+	<!-- begin #page-loader -->
+	<div id="page-loader" class="page-loader fade in"><span class="spinner">Loading...</span></div>
+	<!-- end #page-loader -->
+
+	<!-- begin #page-container -->
+	<div id="page-container" class="fade page-container">
+	    <!-- begin login -->
+		<div class="login">
+		    <!-- begin login-brand -->
+            <div class="login-brand bg-inverse text-white">
+                <img src="../assets/img/logo.png" height="36" class="pull-right" alt="" /> Login
+            </div>
+		    <!-- end login-brand -->
+		    <!-- begin login-content -->
+            <div class="login-content">
+                <h4 class="text-center m-t-0 m-b-20">Login to Tnet</h4>
+                <form method="POST" id="login_form" class="form-input-flat">
+                    <div class="form-group">
+						<input type="email" name="username" class="form-control input-lg" placeholder="Email Address" required/> 
+						<!-- autocomplete="off" -->
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control input-lg" placeholder="Password" required/>
+                    </div>
+                    <div class="row m-b-20">
+                        <div class="col-lg-12">
+                            <button onclick="login()" class="btn btn-lime btn-lg btn-block">Sign in to your account</button>
+                        </div>
+                    </div>
+                    <div class="text-center">
+						<a href="/forgotpassword" class="text-muted">Forgot password?</a>
+                    </div>
+                </form>
+            </div>
+		    <!-- end login-content -->
+		</div>
+		<!-- end login -->
+
+	</div>
+	<!-- end page container -->
+		
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="../assets/plugins/jquery/jquery-3.3.1.min.js"></script>
+	<script src="../assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+	<script src="../assets/plugins/bootstrap/bootstrap-4.1.1/js/bootstrap.bundle.min.js"></script>
+	<!--[if lt IE 9]>
+		<script src="../assets/crossbrowserjs/html5shiv.js"></script>
+		<script src="../assets/crossbrowserjs/respond.min.js"></script>
+	<![endif]-->
+	<script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+	<!-- ================== END BASE JS ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="../assets/js/demo.min.js"></script>
+    <script src="../assets/js/apps.min.js"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+	
+	<script>
+		function login(){
+            console.log("called")
+            var form = $('#login_form');
+            var formData = $(form).serialize();
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: "/login/authenticate",
+                data: formData
+            }).done(function(response) {
+				console.log(response);
+				if(response.message=='loggedin'){
+					window.location = "/dashboard";
+				}else{
+					alert(response.message);
+					form[0].reset();
+				}
+            })
+        }
+		$(document).ready(function() {
+		    App.init();
+			Demo.initThemePanel();
+			// console.log(req.status);
+		});
+	</script>
+</body>
+</html>
