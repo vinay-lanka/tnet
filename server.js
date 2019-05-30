@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 
 var app = express();
-require('dotenv').config();
+// require('dotenv').config();
 app.use(cookieParser());
 app.use(session({
 	secret: 'secret',

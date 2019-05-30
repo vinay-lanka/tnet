@@ -6,7 +6,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Tnet Admin</title>
+	<title>Tnet | Forgot Password</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="Portal to view device details" name="description" />
 	<meta content="Vinay Lanka" name="author" />
@@ -39,15 +39,14 @@
 	<![endif]-->
 </head>
 
-<body ng-app="dashboardApp">
+<body>
 	<!-- begin #page-loader -->
 	<div id="page-loader" class="page-loader fade in"><span class="spinner">Loading...</span></div>
 	<!-- end #page-loader -->
 
 	<!-- begin #page-container -->
 	<div id="page-container"
-		class="fade page-container page-header-fixed page-sidebar-fixed page-with-two-sidebar page-with-footer"
-		ng-controller="userdetails">
+		class="fade page-container page-header-fixed page-sidebar-fixed page-with-two-sidebar page-with-footer">
 		<!-- begin #header -->
 		<div id="header" class="header navbar navbar-default navbar-fixed-top">
 			<!-- begin container-fluid -->
@@ -63,13 +62,6 @@
 					</button>
 				</div>
 				<!-- end mobile sidebar expand / collapse button -->
-
-				<!-- begin navbar-right -->
-				<ul class="nav navbar-nav navbar-right">
-                    <br>
-                    <span class="hidden-xs">Tnetadmin</span></b>
-				</ul>
-				<!-- end navbar-right -->
 			</div>
 			<!-- end container-fluid -->
 		</div>
@@ -77,28 +69,24 @@
 
 		<!--begin #content -->
 		<div id="content">
-		<div class="content">
-			<!-- begin page-header -->
-			<h1 class="page-header">Tnet Administrator Page <small>Add admins</small></h1>
-			<!-- end page-header -->
-		</div>
+            <div class="content">
+                <h1 class="page-header">Forgot Password?</h1>
+            </div>
+		<!-- begin page-header -->
+		<!-- end page-header -->
 		<div class="row">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Register an admin</h4>
+                        <h4 class="modal-title">Enter username here and we'll contact you with a new password</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" id="addadmin" class="form-input-flat">
+                        <form method="POST" id="fogotpass" class="form-input-flat">
                             <div class="form-group">
-                                    <label for="username">Set a username</label>
+                                    <label for="username">Enter username</label>
                                     <input type="email" class="form-control" name="username" placeholder="Username" required>
                             </div>
-                            <div class="form-group">
-                                    <label for="password">Set a password</label>
-                                    <input type="password" class="form-control" name="password" placeholder="password" required>
-                            </div>
-                            <button onclick="addadmin()" class="btn btn-lime btn-lg btn-block">Register!</button>
+                            <button onclick="forgotpass()" class="btn btn-lime btn-lg btn-block">Register!</button>
                         </form>	
                     </div>
                 </div>
@@ -152,14 +140,14 @@
 
 
 	<script>
-        function addadmin(){
+        function forgotpass(){
             console.log("called")
-            var form = $('#addadmin');
+            var form = $('#forgotpass');
 			var formData = $(form).serialize();
 			event.preventDefault();
             $.ajax({
                 type: 'POST',
-                url: "/tnetadmin/makeadmin",
+                url: "/user/forgotpass",
                 data: formData
             }).done(function(response) {
                 // console.log(response);

@@ -121,6 +121,7 @@ router.post('/makeuser', (req,res)=>{
         console.log(err);
     });
 });
+
 router.post('/removeuser', (req,res)=>{
     if(req.body.username!=req.session.username){
         // console.log(req.body);
@@ -139,8 +140,9 @@ router.post('/removeuser', (req,res)=>{
 
 router.post('/adduserdetails', (req,res)=>{
     var jsondata = req.body;
-    var query = 'UPDATE users SET Name=?, Designation=? WHERE username=?';
-    connection.query(query,[jsondata.name,jsondata.designation,req.session.username],(err,result)=>{
+    var pass = encrypt(jsondata.password);
+    var query = 'UPDATE users SET Name=?, Designation=?, password=? WHERE username=?';
+    connection.query(query,[jsondata.name,jsondata.designation,pass,req.session.username],(err,result)=>{
         if (err){
             console.log(err);
             reject(err);
@@ -151,6 +153,10 @@ router.post('/adduserdetails', (req,res)=>{
             res.redirect('/');
         }
     });
+});
+
+router.post('/forgotpass', (req,res)=>{
+    res.send('Successful');
 });
 
 var fetchuserdetails = function(username) {

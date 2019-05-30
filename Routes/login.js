@@ -69,4 +69,8 @@ router.post('/authenticate', (req,res,next)=>{
     }
 });
 
+router.get('/forgotpassword', (req,res)=>{
+    res.sendFile('/public/pages/forgotpass.html', {'root': './'});
+});
+
 module.exports = router;
