@@ -217,7 +217,8 @@
 							<div class="login-content1" style="width: 18rem;">
 								<div class="card-body">
 									<div class="dropdown pull-right" ng-show="adminVar">
-										<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+										<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="false"></i>
 										<div class="dropdown-menu">
 											<a class="dropdown-item" href="#">Delete Factory</a>
 										</div>
@@ -252,7 +253,8 @@
 							<div class="login-content1" style="width: 18rem;">
 								<div class="card-body">
 									<div class="dropdown pull-right" ng-show="adminVar">
-										<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+										<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="false"></i>
 										<div class="dropdown-menu">
 											<a class="dropdown-item" href="#">Delete Shopfloor</a>
 										</div>
@@ -268,8 +270,8 @@
 					</div>
 					<div class="row">
 						<h1 class="page-header">Add a Shopfloor here - <button type="button"
-							onclick="window.location.href='/addstuff'" class="btn btn-primary">Add
-							Shopfloor</button>
+								onclick="window.location.href='/addstuff'" class="btn btn-primary">Add
+								Shopfloor</button>
 						</h1>
 					</div>
 				</div>
@@ -281,23 +283,38 @@
 						<li class="breadcrumb-item active">Shopfloors</li>
 						<li class="breadcrumb-item active">Select Machine</li>
 					</ol>
-					<h1 class="page-header">Select a Machine <small>(To view Details)&nbsp;<br>(Also select default machine)</small></h1>
+					<h1 class="page-header">Select a Machine <small>(To view Details)&nbsp;<br>(Also select default
+							machine)</small></h1>
 					<div class="row">
 						<div class="col-sm-6 col-lg-3" ng-repeat="machine in machines">
+
 							<div class="login-content1" style="width: 18rem;">
 								<div class="card-body">
 									<div class="dropdown pull-right" ng-show="adminVar">
-										<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+										<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="false"></i>
 										<div class="dropdown-menu">
-											<a class="dropdown-item" ng-click="makedefault(machine.mid)">Make default machine</a>
+											<a class="dropdown-item" ng-click="makedefault(machine.mid)">Make default
+												machine</a>
 											<br>
 											<a class="dropdown-item" href="#">Delete Machine</a>
 										</div>
 									</div>
 									<h5 class="card-title">{{machine.macid}}</h5>
-									<p class="card-text">Click to view Details of {{machine.macid}}</p>
-									<button type="button" id="{{machine.mid}}"	ng-click="getmacdetails(machine.mid)"
-										class="btn btn-success">{{machine.macid}}</button>
+									<p class="card-text">
+										Overview of {{machine.macid}}
+									</p>
+								</div>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item">Product Code - {{machine.mid}}</li>
+									<li class="list-group-item">Total Shots - 350</li>
+									<li class="list-group-item">Cycle Time - 11.2s</li>
+								</ul>
+								<div class="card-body">
+									<span><i class="fas fa-info-circle pull-right" ng-show="{{machine.defaultmac}}"></i></span>
+									<span><button type="button" id="{{machine.mid}}"
+											ng-click="getmacdetails(machine.mid)"
+											class="btn btn-success">{{machine.macid}}</button></span>
 								</div>
 							</div>
 							<br><br>
@@ -305,8 +322,8 @@
 					</div>
 					<div class="row">
 						<h1 class="page-header">Add a Machine here - <button type="button"
-							onclick="window.location.href='/addstuff'" class="btn btn-primary">Add
-							Machine</button>
+								onclick="window.location.href='/addstuff'" class="btn btn-primary">Add
+								Machine</button>
 						</h1>
 					</div>
 				</div>
@@ -390,7 +407,7 @@
 		app.controller('selection', function ($scope, $http) {
 			$scope.factoriesvar = true;
 			$scope.shopfloorsvar = false;
-			$scope.machinesvar=false;
+			$scope.machinesvar = false;
 			$http.get("/factories/listfactories").then(function (response) {
 				console.log(response.data);
 				$scope.factories = response.data;
@@ -400,7 +417,7 @@
 				$scope.selectedfactory = fid;
 				$scope.factoriesvar = false;
 				$scope.shopfloorsvar = true;
-				$scope.machinesvar=false;
+				$scope.machinesvar = false;
 				$http.get("/shopfloors/listshopfloors", {
 					params: { factoryid: $scope.selectedfactory }
 				}).then(function (response) {
@@ -413,7 +430,7 @@
 				$scope.selectedshopfloor = sid;
 				$scope.factoriesvar = false;
 				$scope.shopfloorsvar = false;
-				$scope.machinesvar=true;
+				$scope.machinesvar = true;
 				$http.get("/machines/listmachines", {
 					params: { shopfloorid: $scope.selectedshopfloor }
 				}).then(function (response) {
@@ -428,20 +445,29 @@
 					params: { machineid: $scope.selectedmachine }
 				}).then(function (response) {
 					console.log(response);
-					if(response.data.message=='fetched'){
+					if (response.data.message == 'fetched') {
 						window.location = "/dashboard";
-					}else{
+					} else {
 						alert(response.message);
 					}
 				});
 			};
 			$scope.makedefault = function (mid) {
+				// $scope.machinesvar=false;
 				$http.get("/machines/makedefault", {
 					params: { machineid: mid }
 				}).then(function (response) {
+					// $scope.machinesvar=true;
+					$http.get("/machines/listmachines", {
+						params: { shopfloorid: $scope.selectedshopfloor }
+					}).then(function (response) {
+						console.log(response.data);
+						$scope.machines = response.data;
+					});
 					console.log(response);
 					alert(response.data.message);
 				});
+				// $scope.$apply();
 			};
 		});
 		// app.controller('factories', function($scope, $http) {

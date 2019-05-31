@@ -25,7 +25,7 @@ router.get('/listmachines', (req,res)=>{
     shopdetails=JSON.parse(JSON.stringify(req.query));
     if(req.session.loggedin){
         var machinespromise = new Promise((resolve,reject)=>{
-            connection.query('SELECT macid,mid FROM machines WHERE sid=?',[shopdetails.shopfloorid] ,(err,res)=>{
+            connection.query('SELECT macid,mid,defaultmac FROM machines WHERE sid=?',[shopdetails.shopfloorid] ,(err,res)=>{
                 if (err){
                     console.log(err);
                     reject(err);

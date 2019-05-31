@@ -13,6 +13,8 @@ router.get('/', (req,res)=>{
                     defaultmac.then((macdetails)=>{
                         // console.log(macdetails);
                         if(macdetails!='404'){
+                            console.log(macdetails);
+                            res.cookie('macdata', macdetails);
                             res.sendFile('/public/pages/dashboard.html', {'root': './'});
                         }else{
                             res.sendFile('/public/pages/altdashboard.html', {'root': './'});
@@ -72,7 +74,7 @@ var fetchmacdetails = function(oid) {
                 if(Object.keys(res).length==0){
                     resolve('404');
                 }else{
-                    resolve('Exists');
+                    resolve(res);
                 }
             }
         });
