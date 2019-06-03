@@ -4,13 +4,27 @@ var RedisStore = require('connect-redis')(session);
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 
+if (process.env.REDISTOGO_URL) {
+    var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+    var redis = require("redis").createClient(rtg.port, rtg.hostname);
+    var redisAuth = redis.auth(rtg.auth.split(":")[1]);
+} else {
+    var redis = require("redis").createClient();
+}
+
 var app = express();
 // require('dotenv').config();
 app.use(cookieParser());
 app.use(session({
-    store: new RedisStore(options),
+    store: new RedisStore({
+        host: rtg.hostname,
+        port: rtg.port,
+        db: redisAuth[0],
+        pass: redisAuth[1]
+      }),
 	secret: 'secret',
-	resave: true
+	resave: true,
+	saveUninitialized: true
 }));
 app.use(express.static(__dirname + '/public/'));
 app.use(bodyParser.urlencoded({extended : true}));
