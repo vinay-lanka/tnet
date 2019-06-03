@@ -25,7 +25,7 @@ router.get('/listmachines', (req,res)=>{
     shopdetails=JSON.parse(JSON.stringify(req.query));
     if(req.session.loggedin){
         var machinespromise = new Promise((resolve,reject)=>{
-            connection.query('SELECT macid,mid,defaultmac FROM machines WHERE sid=?',[shopdetails.shopfloorid] ,(err,res)=>{
+            connection.query('SELECT macid,mid FROM machines WHERE sid=?',[shopdetails.shopfloorid] ,(err,res)=>{
                 if (err){
                     console.log(err);
                     reject(err);
@@ -79,25 +79,81 @@ router.get('/showmachine', (req,res)=>{
 
 router.get('/makedefault', (req,res)=>{
     var userdata = JSON.parse(req.cookies.userdata);
-    var oid = userdata.oid;
+    var uid = userdata.uid;
     console.log(req.query);
     var mid = parseInt(req.query.machineid);
-    connection.query('UPDATE machines SET defaultmac=0 WHERE oid=?',[oid],(err,res)=>{
-        if (err){
-            console.log(err);
-        }else{
-            console.log(res);
-        }
-    });
-    connection.query('UPDATE machines SET defaultmac=1 WHERE mid=?',[mid],(err,response)=>{
+    // connection.query('UPDATE machines SET defaultmac=0 WHERE oid=?',[oid],(err,res)=>{
+    //     if (err){
+    //         console.log(err);
+    //     }else{
+    //         console.log(res);
+    //     }
+    // });
+    // connection.query('UPDATE machines SET defaultmac=1 WHERE mid=?',[mid],(err,response)=>{
+    //     if (err){
+    //         console.log(err);
+    //         res.send({message:"Could not set default. Please try again"});
+    //     }else{
+    //         console.log(response);
+    //         res.send({message:"Default Machine Updated"});
+    //     }
+    // });
+    connection.query('UPDATE users SET defaultmacid=? WHERE uid=?',[mid,uid],(err,result)=>{
         if (err){
             console.log(err);
             res.send({message:"Could not set default. Please try again"});
         }else{
-            console.log(response);
-            res.send({message:"Default Machine Updated"});
+            console.log(result);
+            var detailspromise = new Promise((resolve,reject)=>{
+                connection.query('SELECT * FROM machines WHERE mid=?',[mid] ,(err,res)=>{
+                    if (err){
+                        console.log(err);
+                        reject(err);
+                    }else{
+                        // console.log(res);
+                        resolve(res);
+                    }
+                });
+            });
+            detailspromise.then((details)=>{
+                    jsondata = JSON.stringify(details)
+                    // console.log(JSON.parse(jsondata));
+                    res.cookie('macdata', jsondata);
+                    res.send({message:"Default Machine Updated"});
+            }, (err)=>{
+                console.log(err);
+            });
         }
     });
+});
+
+router.get('/deletemachine', (req,res)=>{
+    // console.log(JSON.parse(req.cookies.userdata));
+    macdetails=JSON.parse(JSON.stringify(req.query));
+    if(req.session.loggedin){
+        var detailspromise = new Promise((resolve,reject)=>{
+            connection.query('DELETE FROM machines WHERE mid=?',[macdetails.machineid] ,(err,res)=>{
+                if (err){
+                    console.log(err);
+                    reject(err.sqlMessage);
+                }else{
+                    // console.log(res);
+                    resolve(res);
+                }
+            });
+        });
+        detailspromise.then((details)=>{
+                jsondata = JSON.stringify(details)
+                // console.log(JSON.parse(jsondata));
+                // res.cookie('macdata', jsondata);
+                res.send({message:"deleted"});
+        }, (err)=>{
+            res.send('err');
+            console.log(err);
+        });
+    }else{
+        res.send('err');
+    }
 });
 
 module.exports = router;

@@ -38,6 +38,7 @@ router.get('/edituserdetails', (req,res)=>{
 
 router.get('/listusers', (req,res)=>{
     var userdata = JSON.parse(req.cookies.userdata);
+    console.log(userdata);
     if(req.session.loggedin){
         connection.query('SELECT username,uid FROM users WHERE oid=?',[[userdata.oid]],(err,response)=>{
             if (err){

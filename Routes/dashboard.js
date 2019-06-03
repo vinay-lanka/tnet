@@ -9,8 +9,9 @@ router.get('/', (req,res)=>{
         promise.then((details)=>{
             if(details!='404'){
                 if(details.Designation!= null){
-                    var macdetails = req.cookies.macdata;
-                    if(macdetails!=null){
+                    var [macdetails] = JSON.parse(req.cookies.macdata);
+                    console.log(details.defaultmacid);
+                    if(details.defaultmacid!=null){
                         console.log(macdetails);
                         res.sendFile('/public/pages/dashboard.html', {'root': './'});
                     }else{

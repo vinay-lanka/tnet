@@ -26,7 +26,7 @@ router.post('/authenticate', (req,res,next)=>{
 	var password = req.body.password;
     if (username && password) {
         var promise = new Promise((resolve,reject)=>{
-            connection.query('SELECT password,oid FROM users WHERE username = ?', [username],(err,res)=>{
+            connection.query('SELECT password,defaultmacid FROM users WHERE username = ?', [username],(err,res)=>{
                 if (err){
                     console.log(err);
                     reject(err);
@@ -55,7 +55,7 @@ router.post('/authenticate', (req,res,next)=>{
                     req.session.username = username;
                     // res.send({message:'loggedin'});
                     var detailspromise = new Promise((resolve,reject)=>{
-                        connection.query('SELECT * FROM machines WHERE defaultmac=1 AND oid=?',[result.oid],(err,res)=>{
+                        connection.query('SELECT * FROM machines WHERE mid=?',[result.defaultmacid],(err,res)=>{
                             if (err){
                                 console.log(err);
                                 reject(err);
