@@ -1,5 +1,6 @@
 var express = require('express');
 var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 
@@ -7,9 +8,9 @@ var app = express();
 // require('dotenv').config();
 app.use(cookieParser());
 app.use(session({
+    store: new RedisStore(options),
 	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
+	resave: true
 }));
 app.use(express.static(__dirname + '/public/'));
 app.use(bodyParser.urlencoded({extended : true}));
