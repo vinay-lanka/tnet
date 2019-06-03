@@ -87,32 +87,8 @@
     <script src="../assets/js/demo.min.js"></script>
     <script src="../assets/js/apps.min.js"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
-	
-	<script>
-		function login(){
-            console.log("called")
-            var form = $('#login_form');
-            var formData = $(form).serialize();
-            event.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: "/login/authenticate",
-                data: formData
-            }).done(function(response) {
-				console.log(response);
-				if(response.message=='loggedin'){
-					window.location = "/dashboard";
-				}else{
-					alert(response.message);
-					form[0].reset();
-				}
-            })
-        }
-		$(document).ready(function() {
-		    App.init();
-			Demo.initThemePanel();
-			// console.log(req.status);
-		});
-	</script>
+	<!-- ================== START PAGE MODULE JS ================== -->
+	<script src="../assets/pagemodules/loginpage.js"></script>
+	<!-- ================== END PAGE MODULE JS ================== -->
 </body>
 </html>

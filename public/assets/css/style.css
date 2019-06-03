@@ -9933,14 +9933,11 @@ ul.tagit .ui-state-default .ui-icon.ui-icon-close:focus {
     box-shadow: 0 2px 0 rgba(0,0,0,0.07);
 }
 .login-content2 {
-    padding: 20px;
-    border-color: #00ff00;
-    border-style: solid;
-    border-width: 3px;
-    /* position: relative; */
-    width: 420px;   
-    padding: 5px 5px;
-    border-radius: 8px 8px 8px 8px;
+    font-size: 18px;
+    font-weight: bold;
+    width: 420px;
+    padding: 25px 30px;
+    border-radius: 8px 8px 0 0;
     background: #fff;
     box-shadow: 0 2px 0 rgba(0,0,0,0.07);
 }
@@ -9959,7 +9956,7 @@ ul.tagit .ui-state-default .ui-icon.ui-icon-close:focus {
     border-style: solid;
     border-width: 3px;
 }
-.bordercolor-offlie{
+.bordercolor-offline{
     border-color: #727272;
     border-style: solid;
     border-width: 3px;
