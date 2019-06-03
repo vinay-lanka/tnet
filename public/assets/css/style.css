@@ -9933,7 +9933,13 @@ ul.tagit .ui-state-default .ui-icon.ui-icon-close:focus {
     box-shadow: 0 2px 0 rgba(0,0,0,0.07);
 }
 .login-content2 {
-    padding: 25px 30px;
+    padding: 20px;
+    border-color: #00ff00;
+    border-style: solid;
+    border-width: 3px;
+    /* position: relative; */
+    width: 420px;   
+    padding: 5px 5px;
     border-radius: 8px 8px 8px 8px;
     background: #fff;
     box-shadow: 0 2px 0 rgba(0,0,0,0.07);
@@ -9947,6 +9953,49 @@ ul.tagit .ui-state-default .ui-icon.ui-icon-close:focus {
     background: #fff;
     box-shadow: 0 2px 0 rgba(0,0,0,0.07);
 }
+
+.bordercolor-produce{
+    border-color: #00ff00;
+    border-style: solid;
+    border-width: 3px;
+}
+.bordercolor-offlie{
+    border-color: #727272;
+    border-style: solid;
+    border-width: 3px;
+}
+.bordercolor-stop{
+    border-color: #36aeff;
+    border-style: solid;
+    border-width: 3px;
+}
+.bordercolor-alarm{
+    border-color: #ffee00;
+    border-style: solid;
+    border-width: 3px;
+}
+.bordercolor-abnormalstop{
+    border-color: #ff0000;
+    border-style: solid;
+    border-width: 3px;
+}
+.bordercolor-moldchange{
+    border-color: #000000;
+    border-style: solid;
+    border-width: 3px;
+}
+.bordercolor-productioncomplete{
+    border-color: #ffa237;
+    border-style: solid;
+    border-width: 3px;
+}
+
+#container1 {
+    margin: 5px;
+    width: 20px;
+    height: 20px;
+  }
+
 .register-brand,
 .login-brand {
     font-size: 18px;

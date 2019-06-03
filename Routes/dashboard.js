@@ -9,19 +9,13 @@ router.get('/', (req,res)=>{
         promise.then((details)=>{
             if(details!='404'){
                 if(details.Designation!= null){
-                    var defaultmac = fetchmacdetails(details.oid);
-                    defaultmac.then((macdetails)=>{
-                        // console.log(macdetails);
-                        if(macdetails!='404'){
-                            console.log(macdetails);
-                            res.cookie('macdata', macdetails);
-                            res.sendFile('/public/pages/dashboard.html', {'root': './'});
-                        }else{
-                            res.sendFile('/public/pages/altdashboard.html', {'root': './'});
-                        }
-                    },(err)=>{
-                        console.log(err);
-                    });
+                    var macdetails = req.cookies.macdata;
+                    if(macdetails!=null){
+                        console.log(macdetails);
+                        res.sendFile('/public/pages/dashboard.html', {'root': './'});
+                    }else{
+                        res.sendFile('/public/pages/altdashboard.html', {'root': './'});
+                    }
                     // res.sendFile('/public/pages/dashboard.html', {'root': './'});
                 }else{
                     res.sendFile('/public/pages/makeprofile.html', {'root': './'});
@@ -45,8 +39,8 @@ var fetchuserdetails = function(username) {
                 reject(err);
                 // res.redirect('/');
             }else{
-                console.log(res);
-                console.log(Object.keys(res).length);
+                // console.log(res);
+                // console.log(Object.keys(res).length);
                 if(Object.keys(res).length==0){
                     resolve('404');
                 }else{
@@ -61,25 +55,25 @@ var fetchuserdetails = function(username) {
     return promise;
 }
 
-var fetchmacdetails = function(oid) {
-    var promise = new Promise((resolve,reject)=>{
-        connection.query('SELECT * FROM machines WHERE oid = ? AND defaultmac=1', [oid],(err,res)=>{
-            if (err){
-                console.log(err);
-                reject(err);
-                // res.redirect('/');
-            }else{
-                console.log(res);
-                console.log(Object.keys(res).length);
-                if(Object.keys(res).length==0){
-                    resolve('404');
-                }else{
-                    resolve(res);
-                }
-            }
-        });
-    });
-    return promise;
-}
+// var fetchmacdetails = function(oid) {
+//     var promise = new Promise((resolve,reject)=>{
+//         connection.query('SELECT * FROM machines WHERE oid = ? AND defaultmac=1', [oid],(err,res)=>{
+//             if (err){
+//                 console.log(err);
+//                 reject(err);
+//                 // res.redirect('/');
+//             }else{
+//                 console.log(res);
+//                 console.log(Object.keys(res).length);
+//                 if(Object.keys(res).length==0){
+//                     resolve('404');
+//                 }else{
+//                     resolve(res);
+//                 }
+//             }
+//         });
+//     });
+//     return promise;
+// }
 
 module.exports = router;

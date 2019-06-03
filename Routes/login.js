@@ -26,7 +26,7 @@ router.post('/authenticate', (req,res,next)=>{
 	var password = req.body.password;
     if (username && password) {
         var promise = new Promise((resolve,reject)=>{
-            connection.query('SELECT password FROM users WHERE username = ?', [username],(err,res)=>{
+            connection.query('SELECT password,oid FROM users WHERE username = ?', [username],(err,res)=>{
                 if (err){
                     console.log(err);
                     reject(err);
@@ -38,22 +38,43 @@ router.post('/authenticate', (req,res,next)=>{
                     }else{
                         Object.keys(res).forEach(function(key) {
                             var row = res[key];
-                            // console.log(row);
-                            encryptedpass=row.password;
-                            resolve(encryptedpass);
+                            resolve(row);
                         });
                     }
                 }
             });
         });
-        promise.then((encryptedpassword)=>{
+        promise.then((result)=>{
+            // console.log(result);
+            var encryptedpassword = result.password;
             if(encryptedpassword!='404'){
                 // console.log("Encrypted - " + encryptedpassword);
                 decryptedpass = decrypt(encryptedpassword);
                 if(decryptedpass == password){
                     req.session.loggedin = true;
                     req.session.username = username;
-                    res.send({message:'loggedin'});
+                    // res.send({message:'loggedin'});
+                    var detailspromise = new Promise((resolve,reject)=>{
+                        connection.query('SELECT * FROM machines WHERE defaultmac=1 AND oid=?',[result.oid],(err,res)=>{
+                            if (err){
+                                console.log(err);
+                                reject(err);
+                            }else{
+                                // console.log(res);
+                                resolve(res);
+                            }
+                        });
+                    });
+                    detailspromise.then((details)=>{
+                            jsondata = JSON.stringify(details)
+                            // console.log(JSON.parse(jsondata));
+                            res.cookie('macdata', jsondata);
+                            res.send({message:'loggedin'});
+                            // res.send({message:"fetched"});
+                    }, (err)=>{
+                        res.send('err');
+                        console.log(err);
+                    });
                 }else{
                     res.send({message:'Wrong password'});
                 }

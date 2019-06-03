@@ -52,7 +52,7 @@ router.get('/listshopfloors', (req,res)=>{
                     console.log(err);
                     reject(err);
                 }else{
-                    console.log(res);
+                    // console.log(res);
                     resolve(res);
                 }
             });

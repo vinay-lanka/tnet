@@ -30,7 +30,7 @@ router.get('/listmachines', (req,res)=>{
                     console.log(err);
                     reject(err);
                 }else{
-                    console.log(res);
+                    // console.log(res);
                     resolve(res);
                 }
             });
@@ -50,8 +50,31 @@ router.get('/listmachines', (req,res)=>{
 
 router.get('/showmachine', (req,res)=>{
     // console.log(JSON.parse(req.cookies.userdata));
-    console.log(req.query);
-    res.send({message:"fetched"});
+    macdetails=JSON.parse(JSON.stringify(req.query));
+    if(req.session.loggedin){
+        var detailspromise = new Promise((resolve,reject)=>{
+            connection.query('SELECT * FROM machines WHERE mid=?',[macdetails.machineid] ,(err,res)=>{
+                if (err){
+                    console.log(err);
+                    reject(err);
+                }else{
+                    // console.log(res);
+                    resolve(res);
+                }
+            });
+        });
+        detailspromise.then((details)=>{
+                jsondata = JSON.stringify(details)
+                // console.log(JSON.parse(jsondata));
+                res.cookie('macdata', jsondata);
+                res.send({message:"fetched"});
+        }, (err)=>{
+            res.send('err');
+            console.log(err);
+        });
+    }else{
+        res.send('err');
+    }
 });
 
 router.get('/makedefault', (req,res)=>{
