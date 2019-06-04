@@ -37,6 +37,18 @@ app.controller('selection', function ($scope, $http) {
             $scope.factories = response.data;
         });
     };
+    $scope.selectfactorytodelete = function (fid) {
+        console.log(fid);
+        $scope.factorytodelete=fid;
+    };
+    $scope.selectshopfloortodelete = function (sid) {
+        console.log(sid);
+        $scope.shopfloortodelete=sid;
+    };
+    $scope.selectmachinetodelete = function (mid) {
+        console.log(mid);
+        $scope.machinetodelete=mid;
+    };
     $scope.getfactories();
     $scope.getshopfloors = function (fid) {
         console.log(fid);
@@ -51,7 +63,6 @@ app.controller('selection', function ($scope, $http) {
             $scope.shopfloors = response.data;
         });
     };
-    
     $scope.getmachines = function (sid) {
         console.log(sid);
         $scope.selectedshopfloor = sid;
@@ -96,10 +107,10 @@ app.controller('selection', function ($scope, $http) {
         });
         // $scope.$apply();
     };
-    $scope.deletefactory = function (fid) {
-        console.log(fid);
+    $scope.deletefactory = function () {
+        // console.log(fid);
         $http.get("/factories/deletefactory", {
-            params: { factoryid: fid }
+            params: { factoryid: $scope.factorytodelete }
         }).then(function (response) {
             console.log(response);
             if (response.data.message == 'deleted') {
@@ -110,10 +121,10 @@ app.controller('selection', function ($scope, $http) {
             }
         });
     };
-    $scope.deleteshopfloor = function (sid) {
-        console.log(sid);
+    $scope.deleteshopfloor = function () {
+        // console.log(sid);
         $http.get("/shopfloors/deleteshopfloor", {
-            params: { shopfloorid: sid }
+            params: { shopfloorid: $scope.shopfloortodelete }
         }).then(function (response) {
             console.log(response);
             if (response.data.message == 'deleted') {
@@ -124,10 +135,10 @@ app.controller('selection', function ($scope, $http) {
             }
         });
     };
-    $scope.deletemachine = function (mid) {
-        console.log(mid);
+    $scope.deletemachine = function () {
+        // console.log($scope.machinetodelete);
         $http.get("/machines/deletemachine", {
-            params: { machineid: mid }
+            params: { machineid: $scope.machinetodelete }
         }).then(function (response) {
             console.log(response);
             if (response.data.message == 'deleted') {

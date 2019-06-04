@@ -222,7 +222,7 @@
 										<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true"
 											aria-expanded="false"></i>
 										<div class="dropdown-menu">
-											<a class="dropdown-item" href="#modal-deletefac" data-toggle="modal">Delete Factory</a>
+											<a class="dropdown-item" href="#modal-deletefac" data-toggle="modal" ng-click="selectfactorytodelete(factory.fid)">Delete Factory</a>
 										</div>
 									</div>
 									<h5 class="card-title">{{factory.facname}}</h5>
@@ -246,7 +246,7 @@
 											All Machines in shopfloor and All shopfloors in factory will be deleted. 
 											<br><br>
 											<button type="button"
-												ng-click="deletefactory(factory.fid)"
+												ng-click="deletefactory()"
 												class="btn btn-danger"  data-dismiss="modal">  Delete!  </button>
 										</div>
 										<div class="modal-footer">
@@ -280,7 +280,7 @@
 										<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true"
 											aria-expanded="false"></i>
 										<div class="dropdown-menu">
-											<a class="dropdown-item" href="#modal-deleteshop" data-toggle="modal">Delete Shopfloor</a>
+											<a class="dropdown-item" href="#modal-deleteshop" data-toggle="modal" ng-click="selectshopfloortodelete(shopfloor.sid)">Delete Shopfloor</a>
 										</div>
 									</div>
 									<h5 class="card-title">{{shopfloor.sname}}</h5>
@@ -303,7 +303,7 @@
 											All Machines in shopfloor will be deleted. 
 											<br><br>
 											<button type="button"
-												ng-click="deleteshopfloor(shopfloor.sid)"
+												ng-click="deleteshopfloor()"
 												class="btn btn-danger" data-dismiss="modal">  Delete!  </button>
 										</div>
 										<div class="modal-footer">
@@ -348,7 +348,7 @@
 											<a class="dropdown-item" ng-click="makedefault(machine.mid)">Make default
 												machine</a>
 											<br>
-											<a class="dropdown-item" href="#modal-deletemac" data-toggle="modal">Delete Machine</a>
+											<a class="dropdown-item" href="#modal-deletemac" data-toggle="modal" ng-click="selectmachinetodelete(machine.mid)">Delete Machine</a>
 										</div>
 									</div>
 									<h5 class="card-title center">{{machine.macid}}</h5>
@@ -383,7 +383,7 @@
 											Are you sure you want to delete machine? 
 											<br><br>
 											<button type="button"
-												ng-click="deletemachine(machine.mid)"
+												ng-click="deletemachine()"
 												class="btn btn-danger" data-dismiss="modal">  Delete!  </button>
 										</div>
 										<div class="modal-footer">
