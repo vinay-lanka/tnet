@@ -64,6 +64,7 @@ app.get('/selectmachine', (req,res)=>{
 app.use('/login', require('./Routes/login'));
 app.use('/tnetadmin', require('./Routes/tnetadmin'));
 app.use('/dashboard', require('./Routes/dashboard'));
+app.use('/analytics', require('./Routes/analytics'));
 app.use('/user', require('./Routes/user'));
 app.use('/factories', require('./Routes/factories'));
 app.use('/shopfloors', require('./Routes/shopfloors'));

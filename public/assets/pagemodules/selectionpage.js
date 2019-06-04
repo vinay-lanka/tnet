@@ -38,19 +38,6 @@ app.controller('selection', function ($scope, $http) {
         });
     };
     $scope.getfactories();
-    $scope.deletefactory = function (fid) {
-        console.log(fid);
-        $http.get("/factories/deletefactories", {
-            params: { factoryid: fid }
-        }).then(function (response) {
-            console.log(response);
-            if (response.data.message == 'deleted') {
-                window.location = "/selectmachine";
-            } else {
-                alert(response.message);
-            }
-        });
-    };
     $scope.getshopfloors = function (fid) {
         console.log(fid);
         $scope.selectedfactory = fid;
@@ -64,19 +51,7 @@ app.controller('selection', function ($scope, $http) {
             $scope.shopfloors = response.data;
         });
     };
-    $scope.deleteshopfloor = function (sid) {
-        console.log(sid);
-        $http.get("/shopfloors/deleteshopfloor", {
-            params: { shopfloorid: sid }
-        }).then(function (response) {
-            console.log(response);
-            if (response.data.message == 'deleted') {
-                window.location = "/selectmachine";
-            } else {
-                alert(response.message);
-            }
-        });
-    };
+    
     $scope.getmachines = function (sid) {
         console.log(sid);
         $scope.selectedshopfloor = sid;
@@ -120,6 +95,34 @@ app.controller('selection', function ($scope, $http) {
             alert(response.data.message);
         });
         // $scope.$apply();
+    };
+    $scope.deletefactory = function (fid) {
+        console.log(fid);
+        $http.get("/factories/deletefactory", {
+            params: { factoryid: fid }
+        }).then(function (response) {
+            console.log(response);
+            if (response.data.message == 'deleted') {
+                // window.location = "/selectmachine";
+                $scope.getfactories();
+            } else {
+                alert(response.message);
+            }
+        });
+    };
+    $scope.deleteshopfloor = function (sid) {
+        console.log(sid);
+        $http.get("/shopfloors/deleteshopfloor", {
+            params: { shopfloorid: sid }
+        }).then(function (response) {
+            console.log(response);
+            if (response.data.message == 'deleted') {
+                // window.location = "/selectmachine";
+                $scope.getshopfloors($scope.selectedfactory);
+            } else {
+                alert(response.message);
+            }
+        });
     };
     $scope.deletemachine = function (mid) {
         console.log(mid);

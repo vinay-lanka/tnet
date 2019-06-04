@@ -11,7 +11,7 @@ router.get('/', (req,res)=>{
                 if(details.Designation!= null){
                     var [macdetails] = JSON.parse(req.cookies.macdata);
                     console.log(details.defaultmacid);
-                    if(details.defaultmacid!=null){
+                    if(macdetails!=null){
                         console.log(macdetails);
                         res.sendFile('/public/pages/dashboard.html', {'root': './'});
                     }else{

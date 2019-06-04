@@ -70,4 +70,33 @@ router.get('/listshopfloors', (req,res)=>{
     }
 });
 
+router.get('/deleteshopfloor', (req,res)=>{
+    // console.log(JSON.parse(req.cookies.userdata));
+    shopdetails=JSON.parse(JSON.stringify(req.query));
+    if(req.session.loggedin){
+        var detailspromise = new Promise((resolve,reject)=>{
+            connection.query('DELETE FROM shopfloors,machines USING shopfloors LEFT JOIN machines ON shopfloors.sid = machines.sid WHERE shopfloors.sid=?',[shopdetails.shopfloorid] ,(err,res)=>{
+                if (err){
+                    console.log(err);
+                    reject(err.sqlMessage);
+                }else{
+                    // console.log(res);
+                    resolve(res);
+                }
+            });
+        });
+        detailspromise.then((details)=>{
+                jsondata = JSON.stringify(details)
+                // console.log(JSON.parse(jsondata));
+                // res.cookie('macdata', jsondata);
+                res.send({message:"deleted"});
+        }, (err)=>{
+            res.send('err');
+            console.log(err);
+        });
+    }else{
+        res.send('err');
+    }
+});
+
 module.exports = router;

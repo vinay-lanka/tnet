@@ -3,67 +3,60 @@
 <!--[if !IE]><!-->
 <html lang="en">
 <!--<![endif]-->
-
 <head>
 	<meta charset="utf-8" />
-	<title>Tnet Dashboard</title>
+	<title>Tnet | Trend</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-    <meta content="Portal to view device details" name="description" />
+	<meta content="Portal to view device details" name="description" />
 	<meta content="Vinay Lanka" name="author" />
-
+	
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="http://fonts.googleapis.com/css?family=Nunito:400,300,700" rel="stylesheet" id="fontFamilySrc" />
 	<link href="../assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-	<!-- <link href="../assets/plugins/bootstrap/bootstrap-4.1.1/css/bootstrap.min.css" rel="stylesheet" /> -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="../assets/plugins/bootstrap/bootstrap-4.1.1/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="../assets/plugins/font-awesome/5.1/css/all.css" rel="stylesheet" />
 	<link href="../assets/css/animate.min.css" rel="stylesheet" />
 	<link href="../assets/css/style.css" rel="stylesheet" />
 	<!-- ================== END BASE CSS STYLE ================== -->
-
+	
 	<!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
-	<link href="../assets/plugins/bootstrap-calendar/css/bootstrap_calendar.css" rel="stylesheet" />
-	<link href="../assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
-	<link href="../assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" />
-	<link href="../assets/plugins/morris/morris.css" rel="stylesheet" />
+    <link href="../assets/plugins/bootstrap-calendar/css/bootstrap_calendar.css" rel="stylesheet" />
+    <link href="../assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />	
 	<!-- ================== END PAGE LEVEL CSS STYLE ================== -->
-
+    
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="../assets/plugins/pace/pace.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	<!-- ================== END BASE JS ================== -->
-
+	
 	<!--[if lt IE 9]>
 	    <script src="../assets/crossbrowserjs/excanvas.min.js"></script>
 	<![endif]-->
 </head>
-
 <body ng-app="dashboardApp">
 	<!-- begin #page-loader -->
 	<div id="page-loader" class="page-loader fade in"><span class="spinner">Loading...</span></div>
 	<!-- end #page-loader -->
 
 	<!-- begin #page-container -->
-	<div id="page-container"
+	<div id="page-container" 
 		class="fade page-container page-header-fixed page-sidebar-fixed page-with-two-sidebar page-with-footer"
 		ng-controller="userdetails">
 		<!-- begin #header -->
 		<div id="header" class="header navbar navbar-default navbar-fixed-top">
 			<!-- begin container-fluid -->
-			<div class="container-fluid">
+			<div class="container-fluid">				
 				<!-- begin mobile sidebar expand / collapse button -->
 				<div class="navbar-header">
-					<a href="/dashboard" class="navbar-brand"><img src="../assets/img/logo.png" class="logo"
-							alt="" />Tnet Analytics</a>
-					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+					<a href="/" class="navbar-brand"><img src="../assets/img/logo.png" class="logo" alt="" />Tnet Analytics</a>					
+					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">						
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
-					</button>
+					</button>	
 				</div>
 				<!-- end mobile sidebar expand / collapse button -->
-
+				
 				<!-- begin navbar-right -->
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown navbar-user">
@@ -82,7 +75,7 @@
 			<!-- end container-fluid -->
 		</div>
 		<!-- end #header -->
-
+		
 		<!-- begin #sidebar -->
 		<div id="sidebar" class="sidebar">
 			<!-- begin sidebar scrollbar -->
@@ -104,7 +97,7 @@
 						</div>
 					</li>
 					<li class="nav-header">Navigation</li>
-					<li class="active">
+					<li>
 						<a href="/dashboard">
 							<i class="fa fa-home"></i>
 							<span>Dashboard</span>
@@ -117,20 +110,20 @@
 						</a>
 					</li>
 					<li class="divider has-minify-btn"></li>
-					<li class="has-sub">
+					<li class="has-sub active">
 						<a href="javascript:;">
 							<b class="caret pull-right"></b>
 							<i class="fa fa-chart-area"></i>
 							<span>Analytics</span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="histdata.html">Historical Data<i class="fa fa-th text-theme m-l-3"></i></a>
+							<li><a href="/analytics/histdata">Historical Data<i class="fa fa-th text-theme m-l-3"></i></a>
 							</li>
-							<li><a href="trendhistdata.html">Trend/Histogram<i
+							<li class="active"><a href="/analytics/trendhistdata">Trend/Histogram<i
 										class="fa fa-chart-bar text-theme m-l-3"></i></a></li>
-							<li><a href="corrdata.html">Correlation<i class="fa fa-table  text-theme m-l-3"></i></a>
+							<li><a href="/analytics/corrdata">Correlation<i class="fa fa-table  text-theme m-l-3"></i></a>
 							</li>
-							<li><a href="alarmdata.html">Alarm<i
+							<li><a href="/analytics/alarmdata">Alarm<i
 										class="fa fa-exclamation-triangle text-theme m-l-3"></i></a></li>
 						</ul>
 					</li>
@@ -188,7 +181,7 @@
 						<p> Version 01.00.00 </p>
 						<h3></h3>
 						&copy;<b>TOSHIBA MACHINE (CHENNAI) PVT. LTD.</b>
-						<p>All Rights Reserved</p>
+						<p>All Rights Reserved</p>						
 					</div>
 					<div class="modal-footer">
 						<a href="javascript:;" class="btn width-100 btn-default" data-dismiss="modal">Close</a>
@@ -196,33 +189,120 @@
 				</div>
 			</div>
 		</div>
+		
 		<!-- begin #content -->
 		<div id="content" class="content">
+			<!-- begin breadcrumb -->
+			<ol class="breadcrumb pull-right">
+				<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+				<li class="breadcrumb-item"><a href="javascript:;">Analytics</a></li>
+				<li class="breadcrumb-item active">Trend</li>
+			</ol>
+			<!-- end breadcrumb -->
+			<!-- begin page-header -->
+			<h1 class="page-header">Trend <small>(View PDS parameter Trend and Histogram)</small></h1>
+			<!-- end page-header -->
 
-            <div class="jumbotron">
-				<h1 class="page-header">No default machine selected.</h1>
-				<p class="lead">Default Machine may have been deleted.</p>
-                <p class="lead">Select a default machine to view details on login.</p>
-                <hr class="my-4">
-                <p>Select a machine here</p>
-                <a class="btn btn-primary btn-lg" href="/selectmachine" role="button">Machines</a>
-            </div>
-
-			<!-- begin #footer -->
-			<div id="footer" class="footer">
-				<span class="pull-right">
-					<a href="javascript:;" class="btn-scroll-to-top" data-click="scroll-top">
-						<i class="fa fa-arrow-up"></i> <span class="hidden-xs">Back to Top</span>
-					</a>
-				</span>
-				&copy; 2018 <b>Tnet Analytics</b> All Right Reserved
+			<div class="row">
+				<div class="col-lg-12">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active text-primary"><b>Toshiba Machine (Chennai) Pvt. Ltd.</b></li>
+						<li class="breadcrumb-item active text-primary"><b>Chennai</b></li>
+						<li class="breadcrumb-item active text-primary"><b>Unit 02</b></li>
+						<li class="breadcrumb-item active text-primary"><b>Shopfloor 02</b></li>
+						<li class="breadcrumb-item active text-primary"><b>TD - 00600133</b></li>
+					</ol>
+				</div>
+			</div>				
+			
+			<div class="widget">					
+				<div class="widget-header">
+					<span class="pull-right f-s-12 f-w-600"><i class="fa fa-fw fa-circle text-lime-light f-s-12"></i> realtime</span>
+					<h4 id = "id-dataname">Data name (Last *** shots)</h4>
+				</div>						
+				<div class="widget-body p-t-15 p-b-15 bg-inverse-dark">
+					<ul class="list-inline m-0 f-s-12 f-w-600">
+						<li class="m-r-20 text-muted">Customize</li>
+						<li class="dropdown m-r-10">
+							<a href="#" data-toggle="dropdown" class="text-white">Select Parameter <b class="caret text-lime-light"></b></a>
+							<ul id = "id-pdspara-list" class="dropdown-menu"></ul>
+						</li>
+						<li class="dropdown m-r-10">
+							<a href="#" data-toggle="dropdown" class="text-white">Select Shots <b class="caret text-lime-light"></b></a>
+							<ul id = "id-pdsshot-list" class="dropdown-menu"></ul>
+						</li>
+					</ul>
+				</div>	
+				<div class="widget-body bg-muted">
+					<div class="row">											
+						<!--Flot Chart>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+						<div id = "id-trendhisto" class="col-lg-10">
+							<div class="row">
+								<div class="chart-title text-success col-sm-10"><h5 class="m-t-0 m-b-5">Trend</h5></div>
+								<p id="id-shotno" class="m-l-40 p-l-40 f-s-14 m-b-0 text-danger"></p>
+							</div>
+							<div id="flot-tracking-chart-trend" class="height-sm"></div>	
+							<div class="row">
+								<div class="chart-title text-success col-sm-10"><h5 class="m-t-30 m-b-5">Histogram</h5></div>
+							</div>
+							<div id="stacked-chart" class="height-sm"></div>
+						</div>	
+						<div class="col-lg-2">
+							<div class="row m-t-10">
+								<div class="m-l-40 col-sm-12 col-xs-6">
+									<p class="m-t-40 f-s-14 m-b-0 text">Sample Number</p>
+									<p id="id-sample" class="m-t-0 f-s-22 m-b-20 text-brown">sample</p>
+								</div>
+								<div class="m-l-40 col-sm-12 col-xs-6">
+									<p class="f-s-14 m-b-0 text">Minimum</p>
+									<p id="id-data_min_org" class="m-t-0 f-s-22 m-b-20 text-brown">data_min_org</p>
+								</div>
+								<div class="m-l-40 col-sm-12 col-xs-6">
+									<p class="f-s-14 m-b-0 text">Maximum</p>
+									<p id="id-data_max_org" class="m-t-0 f-s-22 m-b-20 text-brown">data_max_org</p>
+								</div>
+								<div class="m-l-40 col-sm-12 col-xs-6">
+									<p class="f-s-14 m-b-0 text">Average</p>
+									<p id="id-average" class="m-t-0 f-s-22 m-b-20 text-brown">average</p>
+								</div>
+								<div class="m-l-40 col-sm-12 col-xs-6">
+									<p class="f-s-14 m-b-0 text">Range</p>
+									<p id="id-range" class="m-t-0 f-s-22 m-b-20 text-brown">range</p>
+								</div>
+								<div class="m-l-40 col-sm-12 col-xs-6">
+									<p class="f-s-14 m-b-0 text">Range/Average</p>
+									<p id="id-r_ave" class="m-t-0 f-s-22 m-b-20 text-brown">r_ave</p>
+								</div>
+								<div class="m-l-40 col-sm-12 col-xs-6">
+									<p class="f-s-14 m-b-0 text">Standard Deviation</p>
+									<p id="id-stddev" class="m-t-0 f-s-22 m-b-20 text-brown">stddev</p>
+								</div>
+								<div class="m-l-40 col-sm-12 col-xs-6">
+									<p class="f-s-14 m-b-0 text">Variance</p>
+									<p id="id-variance" class="m-t-0 f-s-22 m-b-20 text-brown">variance</p>
+								</div>
+							</div>
+						</div>	
+						<!--Flot Chart<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-->
+					</div>
+				</div>
 			</div>
-			<!-- end #footer -->
+			
+            <!-- begin #footer -->
+            <div id="footer" class="footer">
+                <span class="pull-right">
+                    <a href="javascript:;" class="btn-scroll-to-top" data-click="scroll-top">
+                        <i class="fa fa-arrow-up"></i> <span class="hidden-xs">Back to Top</span>
+                    </a>
+                </span>
+                &copy; 2018 <b>Tnet Analytics</b> All Right Reserved
+            </div>
+            <!-- end #footer -->
 		</div>
 		<!-- end #content -->
 	</div>
 	<!-- end page container -->
-
+	
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="../assets/plugins/jquery/jquery-3.3.1.min.js"></script>
 	<script src="../assets/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -235,16 +315,17 @@
 	<script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
 	<script src="../assets/plugins/js/tpage-globals.js"></script>
 	<!-- ================== END BASE JS ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="../assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>
+    <script src="../assets/plugins/chart-js/Chart.min.js"></script>
+	<script src="../assets/plugins/chart-js/Chart.js"></script>
+	<script src="../assets/plugins/gritter/js/jquery.gritter.js"></script>
+    <script src="../assets/js/demo.js"></script>
+    <script src="../assets/js/apps.min.js"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
 
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="../assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>
-	<script src="../assets/plugins/chart-js/Chart.js"></script>
-	<script src="../assets/plugins/chart-js/chartjs-plugin-zoom.js"></script>
-	<script src="../assets/plugins/gritter/js/jquery.gritter.js"></script>
-	<script src="../assets/plugins/morris/raphael.min.js"></script>
-	<script src="../assets/plugins/morris/morris.js"></script>
-	<script src="../assets/plugins/canvasjs/canvasjs.min.js"></script>
-	<script src="../assets/plugins/canvasjs/canvasjs.react.js"></script>
 	<script src="../assets/plugins/flot/jquery.flot.min.js"></script>
 	<script src="../assets/plugins/flot/jquery.flot.time.min.js"></script>
 	<script src="../assets/plugins/flot/jquery.flot.resize.min.js"></script>
@@ -253,17 +334,11 @@
 	<script src="../assets/plugins/flot/jquery.flot.crosshair.min.js"></script>
 	<script src="../assets/plugins/flot/jquery.flot.categories.js"></script>
 	<script src="../assets/plugins/flot/jquery.flot.navigate.js"></script>
-	<script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
-	<script src="../assets/plugins/flot/CurvedLines/curvedLines.js"></script>
-	<script src="../assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-	<script src="../assets/plugins/jquery-jvectormap/jquery-jvectormap-world-merc-en.js"></script>
-	<script src="../assets/js/tpage-dashboard.js"></script>
-	<script src="../assets/js/demo.js"></script>
-	<script src="../assets/js/apps.min.js"></script>
+    <script src="../assets/js/tpage-trendhistdata.js"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 	<!-- ================== START PAGE MODULE JS ================== -->
 	<script src="../assets/pagemodules/userdetails.js"></script>
 	<!-- ================== END PAGE MODULE JS ================== -->
+	
 </body>
-
 </html>
