@@ -341,14 +341,14 @@
 
 							<div class="login-content1 bordercolor-alarm" style="width: 18rem;">
 								<div class="card-body">
-									<div class="dropdown pull-right" ng-show="adminVar">
+									<div class="dropdown pull-right">
 										<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true"
 											aria-expanded="false"></i>
 										<div class="dropdown-menu">
 											<a class="dropdown-item" ng-click="makedefault(machine.mid)">Make default
 												machine</a>
 											<br>
-											<a class="dropdown-item" href="#modal-deletemac" data-toggle="modal" ng-click="selectmachinetodelete(machine.mid)">Delete Machine</a>
+											<a class="dropdown-item" ng-show="adminVar" href="#modal-deletemac" data-toggle="modal" ng-click="selectmachinetodelete(machine.mid)">Delete Machine</a>
 										</div>
 									</div>
 									<h5 class="card-title center">{{machine.macid}}</h5>
