@@ -1,11 +1,13 @@
+/*The tnetadmin page is exclusive to toshiba admins where they add one admin for each comapany*/
+//Requiring modules
 var express = require('express');
 const crypto = require('crypto');
 var connection = require('../connection');
 var router = express.Router();
 
-var secret = 'asecretkey';
+var secret = 'asecretkey';      //Secret key for encrypting password. Should not be changed once started and should be the same as decrypting secret
 
-function encrypt(text) {
+function encrypt(text) {        //Encrpyition function. Uses aes128 standard via the crypto module
     encryptalgo = crypto.createCipher('aes128', secret);
     let encrypted = encryptalgo.update(text, 'utf8', 'hex');
     encrypted += encryptalgo.final('hex');
@@ -13,11 +15,11 @@ function encrypt(text) {
 }
 
 
-router.get('/', (req,res)=>{
+router.get('/', (req,res)=>{    //Serve up the page to add admins
     res.sendFile('/public/pages/tnetadmin.html', {'root': './'});
 });
 
-router.post('/makeadmin', (req,res)=>{
+router.post('/makeadmin', (req,res)=>{      //Make admin adds a new user with the admin parameter set to 1
     // console.log(req.body);
     var jsondata = req.body;
     var values = [];
